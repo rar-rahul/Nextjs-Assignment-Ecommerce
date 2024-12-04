@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     //trigger asyncthunk function
       dispatch(fetchProducts())
-  },[])
+  })
 
   return (
     <div className="container mx-auto p-4">
