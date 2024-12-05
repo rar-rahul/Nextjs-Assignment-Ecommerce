@@ -19,7 +19,7 @@ export default function RootLayout({
         <Provider store={store}>
           <Header/>
         {children}
-        <ToastContainer position="top-right" autoClose={2000} hideProgressBar />
+        <ToastContainer position="bottom-right" autoClose={2000} hideProgressBar />
         </Provider>
       </body>
     </html>

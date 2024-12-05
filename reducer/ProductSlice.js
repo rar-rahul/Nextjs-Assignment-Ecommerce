@@ -22,9 +22,30 @@ const ProductSlice = createSlice({
     initialState,
     reducers:{
         addToCart:(state,action) => {
+            //check item already exist in cart
+            const existingItemIndex = state.cart.findIndex((cartItem) => cartItem.id === action.payload.id);
 
-            return {...state,
-                cart:[...state.cart,action.payload]}
+            if (existingItemIndex >= 0) {
+                // Item already exists in the cart, so we update its quantity
+                state.cart[existingItemIndex].qty += action.payload.qty; // Directly mutate the draft
+              } else{
+
+                return {...state,
+                    cart:[...state.cart,action.payload]}
+
+              }
+
+
+          
+        },
+        removeCart:(state,action) => {
+            const newcart = state.cart.filter(item => item.id !== action.payload)
+           
+            return {
+                ...state,
+                cart:newcart
+            }
+           
         },
         searchKeyword:(state,action) => {
             state.searchQuery = action.payload

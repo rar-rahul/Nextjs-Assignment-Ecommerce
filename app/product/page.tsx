@@ -2,8 +2,13 @@
 import axios from 'axios'
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store'
+import { addToCart } from "./../../reducer/ProductSlice";
+import { toast } from 'react-toastify';
+import { AppDispatch } from "@/store";
+
+
 
 interface Product {
   id: number;
@@ -25,7 +30,7 @@ const page = () => {
   const [priceRange, setPriceRange] = useState<number>(20);  
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);  
   const searchQuery = useSelector((state:RootState) => state.products.searchQuery)
-
+  const dispatch = useDispatch<AppDispatch>()
 
   const fetchAllProducts =async () => {
     const res = await axios.get('https://dummyjson.com/products');
@@ -88,8 +93,6 @@ const page = () => {
   useEffect(() => {
     fetchSearchProduct(); 
   }, [searchQuery]);
-
-  console.log(searchQuery)
  
   return (
     <div>
@@ -165,7 +168,10 @@ const page = () => {
       />
       <h3 className="text-lg font-semibold">{product.title}</h3>
       <p className="text-gray-500">Rs.{product.price}</p>
-      <button className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+      <button className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600" onClick={() => {
+                  dispatch(addToCart({ id: product.id, price: product.price, qty: 1,title:product.title }));
+                  toast.success(`${product.title} has been added to your cart!`);
+                }}>
         Add to Cart
       </button>
     </div>

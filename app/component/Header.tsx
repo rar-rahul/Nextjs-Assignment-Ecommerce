@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { useSelector,useDispatch } from 'react-redux'
 import { RootState } from '@/store'
@@ -9,10 +9,11 @@ import { searchKeyword } from '@/reducer/ProductSlice'
 const Header = () => {
   const store = useSelector((state: RootState) => state.products)
   const cartItemsCount = store.cart.length 
-  const [searchQuery, setSearchQuery] = React.useState('')
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const dispatch = useDispatch()
 
+  //handle serach keyword query
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value)
     dispatch(searchKeyword(searchQuery))
@@ -39,7 +40,7 @@ Logo
         </div>
 
         {/* Center Section: Search Box (for mobile and desktop) */}
-        <div className="flex justify-center w-full lg:w-auto">
+        <div className="flex justify-center w-full lg:w-auto mr-10">
           <input
             type="text"
             placeholder="Search products..."
@@ -53,18 +54,19 @@ Logo
         <div className="hidden lg:flex lg:gap-x-12 items-center">
           {/* Products Link */}
           <Link href="/product" className="text-sm font-semibold text-gray-900">
-            Products
+           Browse Products
           </Link>
 
           {/* Cart Icon */}
           <Link href="/cart" className="relative text-gray-700">
-            <FaShoppingCart size={24} />
-            {cartItemsCount > 0 && (
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
-                {cartItemsCount}
-              </span>
-            )}
-          </Link>
+  <FaShoppingCart size={24} />
+  
+  {cartItemsCount > 0 && (
+    <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full -translate-x-1/2 translate-y-1/2">
+      {cartItemsCount}
+    </span>
+  )}
+</Link>
         </div>
 
         {/* Mobile Menu Button */}
