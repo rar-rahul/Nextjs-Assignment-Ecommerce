@@ -20,7 +20,7 @@ interface Product {
   images: string;
 }
 
-const page = () => {
+const Page = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [category, setCategory] = useState<string[]>([])
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -176,4 +176,4 @@ const page = () => {
   );
 }
 
-export default page;
+export default Page;

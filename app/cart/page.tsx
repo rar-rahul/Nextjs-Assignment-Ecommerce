@@ -20,10 +20,7 @@ export default function CartPage() {
   // Calculate total price
   const totalPrice = cart.reduce((acc, product:ProductCart) => acc + product.price * product.qty, 0);
 
-  const handleRemoveItem = (id: number) => {
-    dispatch(removeCart(id));
-    toast.success('Item removed from cart!');
-  };
+
 
   return (
     <div className="container mx-auto p-6">
