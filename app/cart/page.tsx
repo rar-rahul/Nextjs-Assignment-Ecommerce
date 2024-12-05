@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { removeCart} from './../../reducer/ProductSlice';
 import { toast } from 'react-toastify';
+import Image from 'next/image';
 
 interface ProductCart {
     id: number;
@@ -37,7 +38,7 @@ export default function CartPage() {
               <tr>
                 <th className="px-4 py-2 border-b">Product</th>
                 <th className="px-4 py-2 border-b">Price</th>
-               
+                <th className="px-4 py-2 border-b">Qty</th>
                 <th className="px-4 py-2 border-b">Total</th>
                 <th className="px-4 py-2 border-b">Actions</th>
               </tr>
@@ -47,11 +48,14 @@ export default function CartPage() {
                 <tr key={item.id}>
                   <td className="px-4 py-2 border-b">
                     <div className="flex items-center space-x-4">
-                      <img
-                        src={item.image}  // Assuming you have an image property in cart item
-                        alt={item.title}
-                        className="w-16 h-16 object-cover"
-                      />
+                    <Image
+                src={item.image}
+                alt={item.title}
+                width={50}
+                height={50}
+                priority
+                className="object-cover"
+              />
                       <span className="text-lg">{item.title}</span>
                     </div>
                   </td>
@@ -62,7 +66,9 @@ export default function CartPage() {
                   <td className="px-4 py-2 border-b">
                     <button
                       className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-                      onClick={() =>dispatch(removeCart(item.id))}
+                      onClick={() => {dispatch(removeCart(item.id))
+                        toast.success('Item removed from cart!');
+                      }}
                     >
                       Remove
                     </button>

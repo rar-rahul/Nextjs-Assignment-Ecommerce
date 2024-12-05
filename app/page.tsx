@@ -18,12 +18,20 @@ export default function Home() {
   const [pageSize] = useState(12) 
   const [totalPages, setTotalPages] = useState(1)
   const[products,setProducts] = useState([])
+  const searchQuery = useSelector((state: RootState) => state.products.searchQuery)
+
 
   const fetchPaginatedProducts = async (page: number) => {
     const res = await axios.get(`https://dummyjson.com/products?limit=${pageSize}&skip=${(page - 1) * pageSize}`);
     setTotalPages(Math.ceil(res.data.total / pageSize));  // Calculate total pages based on API response
     return res.data.products;
   }
+
+    //fetch product using keyword
+    const fetchSearchProduct = async () => {
+      const res = await axios.get(`https://dummyjson.com/products/search?q=${searchQuery}`);
+      setProducts(res.data.products);
+    }
 
   const loadProducts = async () => {
     const product = await fetchPaginatedProducts(page);
@@ -34,7 +42,11 @@ export default function Home() {
 
   useEffect(() => {
     loadProducts();
-  }, [page]);  // Fetch products when the page changes
+  }, [page]); 
+
+  useEffect(() => {
+    fetchSearchProduct(); 
+  }, [searchQuery]);
 
   return (
     <div className="container mx-auto p-4">
@@ -48,9 +60,10 @@ export default function Home() {
             <Link href={`/products/${product.id}`}>
               <Image
                 src={product.images[0]}
-                alt={product.name}
+                alt={product.title}
                 width={500}
                 height={200}
+                priority
                 className="w-full h-48 object-cover"
               />
             </Link>

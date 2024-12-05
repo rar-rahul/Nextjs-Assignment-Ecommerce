@@ -5,6 +5,7 @@ import { useSelector,useDispatch } from 'react-redux'
 import { RootState } from '@/store'
 import { FaShoppingCart } from 'react-icons/fa' 
 import { searchKeyword } from '@/reducer/ProductSlice'
+import Image from 'next/image'
 
 const Header = () => {
   const store = useSelector((state: RootState) => state.products)
@@ -35,12 +36,18 @@ const Header = () => {
             <span className="sr-only">Logo</span>
            
 
-Logo
+            <Image
+          src="/ecomm.png" // Replace this with the actual path to your logo
+          alt="Logo"
+          width={50} // Adjust the width as needed
+          height={50} // Adjust the height as needed
+          className="object-contain"
+        />
           </Link>
         </div>
 
         {/* Center Section: Search Box (for mobile and desktop) */}
-        <div className="flex justify-center w-full lg:w-auto mr-10">
+        <div className="flex justify-center w-full lg:w-auto mr-6">
           <input
             type="text"
             placeholder="Search products..."
