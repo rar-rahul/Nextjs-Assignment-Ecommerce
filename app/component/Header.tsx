@@ -1,18 +1,22 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import { RootState } from '@/store'
-import { FaShoppingCart } from 'react-icons/fa' // Cart Icon from react-icons
+import { FaShoppingCart } from 'react-icons/fa' 
+import { searchKeyword } from '@/reducer/ProductSlice'
 
 const Header = () => {
   const store = useSelector((state: RootState) => state.products)
-  const cartItemsCount = store.cart.length // Assuming 'cart' is an array in your redux store
+  const cartItemsCount = store.cart.length 
   const [searchQuery, setSearchQuery] = React.useState('')
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const dispatch = useDispatch()
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value)
+    dispatch(searchKeyword(searchQuery))
+    
   }
 
   // Toggle mobile menu visibility
@@ -48,7 +52,7 @@ Logo
         {/* Right Section: Navigation and Cart Menu */}
         <div className="hidden lg:flex lg:gap-x-12 items-center">
           {/* Products Link */}
-          <Link href="/products" className="text-sm font-semibold text-gray-900">
+          <Link href="/product" className="text-sm font-semibold text-gray-900">
             Products
           </Link>
 
@@ -88,7 +92,7 @@ Logo
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden bg-gray-50 px-6 py-4 space-y-4">
-          <Link href="/products" className="block text-gray-900 font-semibold">Products</Link>
+          <Link href="/product" className="block text-gray-900 font-semibold">Products</Link>
           <Link href="/cart" className="block text-gray-900 font-semibold">Cart</Link>
         </div>
       )}

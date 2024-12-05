@@ -7,6 +7,7 @@ const initialState = {
     cart:[],
     products:[],
     status: 'idle',
+    searchQuery:''
 }
 
 //Thunk Function to fetch data with async
@@ -25,8 +26,8 @@ const ProductSlice = createSlice({
             return {...state,
                 cart:[...state.cart,action.payload]}
         },
-        removeCart:() =>{
-
+        searchKeyword:(state,action) => {
+            state.searchQuery = action.payload
         }
     },
     extraReducers:(builder) => {
@@ -45,5 +46,5 @@ const ProductSlice = createSlice({
     }
 })
 
-export const {addToCart,removeCart} = ProductSlice.actions
+export const {addToCart,removeCart,searchKeyword} = ProductSlice.actions
 export default ProductSlice.reducer

@@ -7,7 +7,7 @@ export async function GET() {
         const data = await axios.get('https://dummyjson.com/products');
         // Sending a success response back to the client
         return NextResponse.json({ message: "All Product Fetch Successfully", data: data.data.products });
-      } catch (error:any) {
+      } catch (error) {
         return NextResponse.json({ message: "Something went wrong",error:error}, { status: 500 });
       }
 }

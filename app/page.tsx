@@ -14,9 +14,8 @@ export default function Home() {
   const products = useSelector((state:RootState) => state.products.products)
   const dispatch = useDispatch<AppDispatch>()
 
-
   useEffect(() => {
-    //trigger asyncthunk function
+    //trigger asyncthunk function for loading products
       dispatch(fetchProducts())
   })
 

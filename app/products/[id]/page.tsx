@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'next/navigation'
-import axios from 'axios'
+import React from 'react'
+
 import Image from 'next/image'
 
 interface Product {
