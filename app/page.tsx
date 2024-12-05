@@ -9,7 +9,7 @@ import { addToCart } from "./../reducer/ProductSlice";
 import { toast } from 'react-toastify';
 import axios from "axios";
 
-
+//
 interface Product {
   id: number;
   title: string;
@@ -39,19 +39,19 @@ export default function Home() {
   }
 
     //fetch product using keyword
-    const fetchSearchProduct = useCallback(async () => {
+    const fetchSearchProduct =async () => {
       const res = await axios.get(`https://dummyjson.com/products/search?q=${searchQuery}`);
       setProducts(res.data.products);
-    },[])
+    }
 
-    const loadProducts = useCallback(async () => {
+    const loadProducts =async () => {
       try {
-        const res = await axios.get('https://dummyjson.com/products');
-        setProducts(res.data.products);
+        const products = await fetchPaginatedProducts(page);
+        setProducts(products);
       } catch (error) {
         console.error(error);
       }
-    }, []);
+    }
 
   useEffect(() => {
     loadProducts();
@@ -65,7 +65,7 @@ export default function Home() {
     <div className="container mx-auto p-4">
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((product: Product) => (
+        {products.map((product: any) => (
           <div
             key={product.id}
             className="bg-white shadow-md rounded-lg overflow-hidden"

@@ -1,7 +1,7 @@
 'use client'
 import axios from 'axios'
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store'
 import { addToCart } from "./../../reducer/ProductSlice";
@@ -67,7 +67,7 @@ const Page = () => {
     setPriceRange(Number(e.target.value));
   }
 
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     let filtered = products;
     // Filter by selected categories
     if (selectedCategories.length > 0) {
@@ -78,7 +78,7 @@ const Page = () => {
     // Filter by price range
     filtered = filtered.filter((product: Product) => product.price <= priceRange);
     setFilteredProducts(filtered);
-  }
+  },[])
 
   useEffect(() => {
     applyFilters(); 
