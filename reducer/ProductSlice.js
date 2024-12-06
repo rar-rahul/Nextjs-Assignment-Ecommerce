@@ -23,16 +23,27 @@ const ProductSlice = createSlice({
     reducers:{
         addToCart:(state,action) => {
             //check item already exist in cart
-            const existingItemIndex = state.cart.findIndex((cartItem) => cartItem.id === action.payload.id);
+            // const existingItemIndex = state.cart.findIndex((cartItem) => cartItem.id === action.payload.id);
 
-            if (existingItemIndex >= 0) {
-                // Item already exists in the cart, so we update its quantity
-                state.cart[existingItemIndex].qty += action.payload.qty; // Directly mutate the draft
-              } else{
+            // if (existingItemIndex >= 0) {
+            //     // Item already exists in the cart, so we update its quantity
+            //     state.cart[existingItemIndex].qty += action.payload.qty; // Directly mutate the draft
+            //   } else{
 
-                return {...state,
-                    cart:[...state.cart,action.payload]}
+            //     return {...state,
+            //         cart:[...state.cart,action.payload]}
 
+            //   }
+
+              const product = action.payload;
+              const existProduct = state.cart.find(item => item.id === product.id);
+              if(existProduct){
+                  existProduct.qty += product.qty
+              }else{
+                  return {
+                      ...state,
+                      cart:[...state.cart,action.payload]
+                     }
               }
 
 

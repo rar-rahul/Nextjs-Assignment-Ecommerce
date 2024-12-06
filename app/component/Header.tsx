@@ -3,12 +3,14 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { useSelector,useDispatch } from 'react-redux'
 import { RootState } from '@/store'
-import { FaShoppingCart } from 'react-icons/fa' 
+import { FaShoppingCart,FaHeart } from 'react-icons/fa' 
 import { searchKeyword } from '@/reducer/ProductSlice'
 import Image from 'next/image'
 
 const Header = () => {
   const store = useSelector((state: RootState) => state.products)
+  const wishlist = useSelector((state: RootState) => state.wishlist.wishList);
+
   const cartItemsCount = store.cart.length 
   const [searchQuery, setSearchQuery] = useState('')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -34,15 +36,13 @@ const Header = () => {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Logo</span>
-           
-
             <Image
-          src="/ecomm.png" // Replace this with the actual path to your logo
-          alt="Logo"
-          width={50} // Adjust the width as needed
-          height={50} // Adjust the height as needed
-          className="object-contain"
-        />
+              src="/ecomm.png" // Replace this with the actual path to your logo
+              alt="Logo"
+              width={50} // Adjust the width as needed
+              height={50} // Adjust the height as needed
+              className="object-contain"
+            />
           </Link>
         </div>
 
@@ -57,23 +57,32 @@ const Header = () => {
           />
         </div>
 
-        {/* Right Section: Navigation and Cart Menu */}
+        {/* Right Section: Navigation, Wishlist, and Cart Menu */}
         <div className="hidden lg:flex lg:gap-x-12 items-center">
           {/* Products Link */}
           <Link href="/product" className="text-sm font-semibold text-gray-900">
-           Browse Products
+            Browse Products
+          </Link>
+
+          {/* Wishlist Icon */}
+          <Link href="/wishlist" className="relative text-gray-700">
+            <FaHeart size={24} />
+            {wishlist.length > 0 && (
+              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full -translate-x-1/2 translate-y-1/2">
+                {wishlist.length}
+              </span>
+            )}
           </Link>
 
           {/* Cart Icon */}
           <Link href="/cart" className="relative text-gray-700">
-  <FaShoppingCart size={24} />
-  
-  {cartItemsCount > 0 && (
-    <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full -translate-x-1/2 translate-y-1/2">
-      {cartItemsCount}
-    </span>
-  )}
-</Link>
+            <FaShoppingCart size={24} />
+            {cartItemsCount > 0 && (
+              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full -translate-x-1/2 translate-y-1/2">
+                {cartItemsCount}
+              </span>
+            )}
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -103,6 +112,7 @@ const Header = () => {
         <div className="lg:hidden bg-gray-50 px-6 py-4 space-y-4">
           <Link href="/product" className="block text-gray-900 font-semibold">Products</Link>
           <Link href="/cart" className="block text-gray-900 font-semibold">Cart</Link>
+          <Link href="/wishlist" className="block text-gray-900 font-semibold">Wishlist</Link>
         </div>
       )}
     </header>

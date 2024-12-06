@@ -7,6 +7,7 @@ import { RootState } from '@/store'
 import { addToCart } from "./../../reducer/ProductSlice";
 import { toast } from 'react-toastify';
 import { AppDispatch } from "@/store";
+import Link from 'next/link';
 
 interface Product {
   id: number;
@@ -30,7 +31,7 @@ const Page = () => {
   const dispatch = useDispatch<AppDispatch>()
 
   const fetchAllProducts = async () => {
-    const res = await axios.get('https://dummyjson.com/products');
+    const res = await axios.get('https://dummyjson.com/products?limit=0');
     setProducts(res.data.products);
     setFilteredProducts(res.data.products);
   }
@@ -149,6 +150,7 @@ const Page = () => {
           ) : (
             filteredProducts.map((product: Product) => (
               <div className="bg-white p-4 rounded-lg shadow-lg" key={product.id}>
+                 <Link href={`/products/${product.id}`}>
                 <Image
                   src={product.images[0]}
                   alt={product.title}
@@ -157,8 +159,10 @@ const Page = () => {
                   priority
                   className="w-full h-48 object-cover"
                 />
+                 </Link>
                 <h3 className="text-lg font-semibold">{product.title}</h3>
                 <p className="text-gray-500">Rs.{product.price}</p>
+               
                 <button
                   className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
                   onClick={() => {

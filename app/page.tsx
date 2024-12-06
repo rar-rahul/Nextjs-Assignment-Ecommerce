@@ -6,6 +6,7 @@ import { AppDispatch } from "@/store";
 import { RootState } from '@/store';
 import Link from "next/link";
 import { addToCart } from "./../reducer/ProductSlice";
+import {addToWishlist} from "./../reducer/WishlistSlice"
 import { toast } from 'react-toastify';
 import axios from "axios";
 
@@ -82,16 +83,26 @@ export default function Home() {
             <div className="p-4">
               <h3 className="text-lg font-semibold">{product.title}</h3>
               <p className="text-gray-500 text-sm">Rs.{product.price}</p>
-              <p className="text-gray-700 text-base mt-2">Some description of the product.</p>
+              <p className="text-gray-700 text-base mt-2">{product.description}</p>
               <button
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
-                onClick={() => {
-                  dispatch(addToCart({ id: product.id, price: product.price, qty: 1,title:product.title,image:product.images[0] }));
-                  toast.success(`${product.title} has been added to your cart!`);
-                }}
-              >
-                Add to Cart
-              </button>
+              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
+              onClick={() => {
+                dispatch(addToCart({ id: product.id, price: product.price, qty: 1, title: product.title, image: product.images[0] }));
+                toast.success(`${product.title} has been added to your cart!`);
+              }}
+            >
+              Add to Cart
+            </button>
+            {/* Add Wishlist Button */}
+            <button
+              className="mt-4 ml-2 px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600"
+              onClick={() => {
+                dispatch(addToWishlist({ id: product.id, title: product.title, price: product.price, image: product.images[0] }));
+                toast.success(`${product.title} has been added to your wishlist!`);
+              }}
+            >
+              Add to Wishlist
+            </button>
             </div>
           </div>
         ))}

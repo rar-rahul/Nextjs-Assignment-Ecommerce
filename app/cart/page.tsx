@@ -77,7 +77,7 @@ export default function CartPage() {
 
           <div className="flex justify-between items-center mt-6">
             <span className="text-lg font-semibold">Total: Rs. {totalPrice}</span>
-            <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+            <button className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-blue-600">
               Proceed to Checkout
             </button>
           </div>
