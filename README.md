@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E-commerce Website
+
+This is an e-commerce website built using Next.js, Tailwind CSS, Redux, and React. It allows users to browse products, add them to the cart, view their wishlist, and manage their shopping experience.
+
+## Features
+- Product listing with images, titles, and prices.
+- Add products to the cart and wishlist.
+- View the cart and wishlist.
+- Responsive design with Tailwind CSS.
+- User-friendly UI for both mobile and desktop views.
+- Searching and Filtering Functionality
+
+## Live Demo
+
+You can view the live version of the website here:
+
+[Live Demo on Vercel](https://nextjs-assignment-ecommerce.vercel.app/)
+
+## Technologies Used
+- **Next.js**: React framework for building server-side rendered web applications.
+- **Tailwind CSS**: A utility-first CSS framework for styling the application.
+- **Redux**: State management for handling the cart and wishlist data.
+- **React Icons**: For adding icons like shopping cart and wishlist.
+- **TypeScript**: for type safety and better development experience.
+- **Vercel**: For deployment and hosting.
+
 
 ## Getting Started
 
-First, run the development server:
+To run the project locally, follow these steps:
 
-```bash
+### Prerequisites
+Make sure you have the following installed on your machine:
+- [Node.js](https://nodejs.org/) (v16 or above recommended)
+- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
+
+### 1. Clone the Repository
+Clone this repository to your local machine using the following command:
+
+git clone https://github.com/rar-rahul/Nextjs-Assignment-Ecommerce.git
+
+### 2. Install Dependency
+
+cd Nextjs-Assignment-Ecommerce
+npm install
+
+### 3. Run the Development Server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 4. Open the Application
+Now, you can open the application in your browser at http://localhost:3000. 
+You should see the homepage of the e-commerce website.
