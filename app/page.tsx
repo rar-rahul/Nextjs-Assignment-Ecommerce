@@ -24,7 +24,6 @@ interface Product {
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>()
-  //const products = useSelector((state: RootState) => state.products.products)
   const [page, setPage] = useState(1)  
   const [pageSize] = useState(12) 
   const [totalPages, setTotalPages] = useState(1)
@@ -44,7 +43,7 @@ export default function Home() {
       setProducts(res.data.products);
     }
 
-    const loadProducts =async () => {
+    const loadProducts = async () => {
       try {
         const products = await fetchPaginatedProducts(page);
         setProducts(products);
@@ -82,7 +81,7 @@ export default function Home() {
             </Link>
             <div className="p-4">
               <h3 className="text-lg font-semibold">{product.title}</h3>
-              <p className="text-gray-500 text-sm">{product.price}</p>
+              <p className="text-gray-500 text-sm">Rs.{product.price}</p>
               <p className="text-gray-700 text-base mt-2">Some description of the product.</p>
               <button
                 className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"

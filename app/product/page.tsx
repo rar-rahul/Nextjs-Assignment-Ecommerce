@@ -67,7 +67,7 @@ const Page = () => {
     setPriceRange(Number(e.target.value));
   }
 
-  const applyFilters = useCallback(() => {
+  const applyFilters = () => {
     let filtered = products;
     // Filter by selected categories
     if (selectedCategories.length > 0) {
@@ -78,9 +78,10 @@ const Page = () => {
     // Filter by price range
     filtered = filtered.filter((product: Product) => product.price <= priceRange);
     setFilteredProducts(filtered);
-  },[])
+  }
 
   useEffect(() => {
+    //when price range and categories change then this filter function will trigger and page rerender
     applyFilters(); 
   }, [selectedCategories, priceRange]);
 
