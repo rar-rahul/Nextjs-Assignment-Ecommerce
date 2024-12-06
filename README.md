@@ -13,8 +13,8 @@ This is an e-commerce website built using Next.js, Tailwind CSS, Redux, and Reac
 ## Live Demo
 
 You can view the live version of the website here:
-
-[Live Demo on Vercel](https://nextjs-assignment-ecommerce.vercel.app/)
+https://nextjs-assignment-ecommerce.vercel.app/
+Click Here For [Live Demo on Vercel](https://nextjs-assignment-ecommerce.vercel.app/)
 
 ## Technologies Used
 - **Next.js**: React framework for building server-side rendered web applications.
