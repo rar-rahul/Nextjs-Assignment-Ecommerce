@@ -102,7 +102,7 @@ const Page = () => {
             <input
               type="range"
               min={0}
-              max={500}
+              max={20000}
               step={10}
               id="price-range"
               value={priceRange}
@@ -112,7 +112,7 @@ const Page = () => {
             <div className="flex justify-between text-sm">
               <span>Rs.0</span>
               <span id="price-value">Rs.250</span>
-              <span>Rs.500</span>
+              <span>Rs.20000</span>
             </div>
           </div>
           {/* Categories Filter */}
