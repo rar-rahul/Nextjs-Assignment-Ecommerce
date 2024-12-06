@@ -1,7 +1,7 @@
 'use client'
 import axios from 'axios'
 import Image from 'next/image';
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store'
 import { addToCart } from "./../../reducer/ProductSlice";

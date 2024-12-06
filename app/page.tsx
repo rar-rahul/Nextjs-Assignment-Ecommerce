@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { useCallback, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { AppDispatch } from "@/store";
 import { RootState } from '@/store';
 import Link from "next/link";
@@ -64,7 +64,7 @@ export default function Home() {
     <div className="container mx-auto p-4">
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((product: any) => (
+        {products.map((product: Product) => (
           <div
             key={product.id}
             className="bg-white shadow-md rounded-lg overflow-hidden"
