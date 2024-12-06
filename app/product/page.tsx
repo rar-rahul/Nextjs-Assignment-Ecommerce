@@ -1,13 +1,13 @@
-'use client'
-import axios from 'axios'
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store'
+"use client";
+import axios from "axios";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store";
 import { addToCart } from "./../../reducer/ProductSlice";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { AppDispatch } from "@/store";
-import Link from 'next/link';
+import Link from "next/link";
 
 interface Product {
   id: number;
@@ -22,35 +22,39 @@ interface Product {
 }
 
 const Page = () => {
-  const [products, setProducts] = useState<Product[]>([])
-  const [category, setCategory] = useState<string[]>([])
+  const [products, setProducts] = useState<Product[]>([]);
+  const [category, setCategory] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [priceRange, setPriceRange] = useState<number>(20);  
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);  
-  const searchQuery = useSelector((state: RootState) => state.products.searchQuery)
-  const dispatch = useDispatch<AppDispatch>()
+  const [priceRange, setPriceRange] = useState<number>(20);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const searchQuery = useSelector(
+    (state: RootState) => state.products.searchQuery,
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
   const fetchAllProducts = async () => {
-    const res = await axios.get('https://dummyjson.com/products?limit=0');
+    const res = await axios.get("https://dummyjson.com/products?limit=0");
     setProducts(res.data.products);
     setFilteredProducts(res.data.products);
-  }
+  };
 
   const fetchAllCategory = async () => {
-    const res = await axios.get('https://dummyjson.com/products/category-list');
+    const res = await axios.get("https://dummyjson.com/products/category-list");
     setCategory(res.data);
-  }
+  };
 
   //fetch product using keyword
   const fetchSearchProduct = async () => {
-    const res = await axios.get(`https://dummyjson.com/products/search?q=${searchQuery}`);
+    const res = await axios.get(
+      `https://dummyjson.com/products/search?q=${searchQuery}`,
+    );
     setFilteredProducts(res.data.products);
-  }
+  };
 
   useEffect(() => {
     fetchAllProducts();
     fetchAllCategory();
-  }, [])
+  }, []);
 
   // Handle category change
   const handleCategoryChange = (category: string) => {
@@ -61,33 +65,35 @@ const Page = () => {
         return [...prev, category];
       }
     });
-  }
+  };
 
   // Handle price range filter change
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPriceRange(Number(e.target.value));
-  }
+  };
 
   const applyFilters = () => {
     let filtered = products;
     // Filter by selected categories
     if (selectedCategories.length > 0) {
       filtered = filtered.filter((product: Product) =>
-        selectedCategories.includes(product.category)
+        selectedCategories.includes(product.category),
       );
     }
     // Filter by price range
-    filtered = filtered.filter((product: Product) => product.price <= priceRange);
+    filtered = filtered.filter(
+      (product: Product) => product.price <= priceRange,
+    );
     setFilteredProducts(filtered);
-  }
+  };
 
   useEffect(() => {
     //when price range and categories change then this filter function will trigger and page rerender
-    applyFilters(); 
+    applyFilters();
   }, [selectedCategories, priceRange]);
 
   useEffect(() => {
-    fetchSearchProduct(); 
+    fetchSearchProduct();
   }, [searchQuery]);
 
   return (
@@ -149,25 +155,38 @@ const Page = () => {
             </div>
           ) : (
             filteredProducts.map((product: Product) => (
-              <div className="bg-white p-4 rounded-lg shadow-lg" key={product.id}>
-                 <Link href={`/products/${product.id}`}>
-                <Image
-                  src={product.images[0]}
-                  alt={product.title}
-                  width={500}
-                  height={200}
-                  priority
-                  className="w-full h-48 object-cover"
-                />
-                 </Link>
+              <div
+                className="bg-white p-4 rounded-lg shadow-lg"
+                key={product.id}
+              >
+                <Link href={`/products/${product.id}`}>
+                  <Image
+                    src={product.images[0]}
+                    alt={product.title}
+                    width={500}
+                    height={200}
+                    priority
+                    className="w-full h-48 object-cover"
+                  />
+                </Link>
                 <h3 className="text-lg font-semibold">{product.title}</h3>
                 <p className="text-gray-500">Rs.{product.price}</p>
-               
+
                 <button
                   className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
                   onClick={() => {
-                    dispatch(addToCart({ id: product.id, price: product.price, qty: 1, title: product.title, image: product.images[0] }));
-                    toast.success(`${product.title} has been added to your cart!`);
+                    dispatch(
+                      addToCart({
+                        id: product.id,
+                        price: product.price,
+                        qty: 1,
+                        title: product.title,
+                        image: product.images[0],
+                      }),
+                    );
+                    toast.success(
+                      `${product.title} has been added to your cart!`,
+                    );
                   }}
                 >
                   Add to Cart
@@ -179,6 +198,6 @@ const Page = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Page;

@@ -1,37 +1,38 @@
-'use client'
-import React, { useState } from 'react'
-import Link from 'next/link'
-import { useSelector,useDispatch } from 'react-redux'
-import { RootState } from '@/store'
-import { FaShoppingCart,FaHeart } from 'react-icons/fa' 
-import { searchKeyword } from '@/reducer/ProductSlice'
-import Image from 'next/image'
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/store";
+import { FaShoppingCart, FaHeart } from "react-icons/fa";
+import { searchKeyword } from "@/reducer/ProductSlice";
+import Image from "next/image";
 
 const Header = () => {
-  const store = useSelector((state: RootState) => state.products)
+  const store = useSelector((state: RootState) => state.products);
   const wishlist = useSelector((state: RootState) => state.wishlist.wishList);
 
-  const cartItemsCount = store.cart.length 
-  const [searchQuery, setSearchQuery] = useState('')
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const dispatch = useDispatch()
+  const cartItemsCount = store.cart.length;
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useDispatch();
 
   //handle serach keyword query
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value)
-    dispatch(searchKeyword(searchQuery))
-    
-  }
+    setSearchQuery(e.target.value);
+    dispatch(searchKeyword(searchQuery));
+  };
 
   // Toggle mobile menu visibility
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <header className="bg-white shadow-md">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-        
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        aria-label="Global"
+      >
         {/* Left Section: Logo */}
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
@@ -101,7 +102,11 @@ const Header = () => {
               stroke="currentColor"
               aria-hidden="true"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
             </svg>
           </button>
         </div>
@@ -110,13 +115,19 @@ const Header = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden bg-gray-50 px-6 py-4 space-y-4">
-          <Link href="/product" className="block text-gray-900 font-semibold">Products</Link>
-          <Link href="/cart" className="block text-gray-900 font-semibold">Cart</Link>
-          <Link href="/wishlist" className="block text-gray-900 font-semibold">Wishlist</Link>
+          <Link href="/product" className="block text-gray-900 font-semibold">
+            Products
+          </Link>
+          <Link href="/cart" className="block text-gray-900 font-semibold">
+            Cart
+          </Link>
+          <Link href="/wishlist" className="block text-gray-900 font-semibold">
+            Wishlist
+          </Link>
         </div>
       )}
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
